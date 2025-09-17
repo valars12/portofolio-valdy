@@ -1,0 +1,336 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { Github, Instagram, Mail, Phone, Globe, ChevronRight, ExternalLink, Moon, Sun } from "lucide-react";
+
+/*
+  Single-file React portfolio for Valdy
+  - Modern, responsive, dark by default
+  - Tailwind CSS utility classes
+  - Minimal custom components (Card, Button, Container, SectionTitle)
+  - Includes: Hero, Work, Services, Tech, Testimonials, About, Contact, Footer
+  - Links:
+    GitHub: https://github.com/valars12?tab=repositories
+    WhatsApp: 082292996138 (wa.me/6282292996138)
+    Instagram: https://www.instagram.com/valarss_/
+    Email: arivyarsyad@gmail.com
+    Projects: https://istimewaplafon.com/ , https://brutal-rental.vercel.app/
+*/
+
+// --- Mini UI primitives ---
+const Container = ({ children }) => (
+  <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">{children}</div>
+);
+
+const Card = ({ children, className = "" }) => (
+  <div className={`rounded-2xl border border-white/10 bg-white/5 shadow-lg shadow-black/10 backdrop-blur ${className}`}>{children}</div>
+);
+
+const Button = ({ as: Tag = "a", className = "", children, ...props }) => (
+  <Tag
+    className={`inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition-transform hover:translate-y-[-1px] active:translate-y-0 shadow-sm ${className}`}
+    {...props}
+  >
+    {children}
+  </Tag>
+);
+
+const SectionTitle = ({ eyebrow, title, desc }) => (
+  <div className="mb-10 text-center">
+    {eyebrow && <div className="mb-2 text-xs uppercase tracking-[0.2em] text-white/60">{eyebrow}</div>}
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">
+      {title}
+    </h2>
+    {desc && <p className="mx-auto mt-3 max-w-2xl text-white/70">{desc}</p>}
+  </div>
+);
+
+// --- Data ---
+const LINKS = {
+  github: "https://github.com/valars12?tab=repositories",
+  wa: "https://wa.me/6282292996138",
+  ig: "https://www.instagram.com/valarss_/",
+  email: "mailto:arivyarsyad@gmail.com",
+};
+
+const PROJECTS = [
+  {
+    title: "Istimewa Plafon",
+    url: "https://istimewaplafon.com/",
+    img: "https://images.unsplash.com/photo-1523419409543-a5e549c1eee8?q=80&w=1400&auto=format&fit=crop",
+    stack: ["Next.js", "Tailwind", "SEO"],
+    blurb: "Company profile bersih, mobile-first, cepat dan SEO-ready.",
+  },
+  {
+    title: "Brutal Rental",
+    url: "https://brutal-rental.vercel.app/",
+    img: "https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=1400&auto=format&fit=crop",
+    stack: ["React", "Tailwind", "Vercel"],
+    blurb: "Katalog sewa kendaraan: filter, CTA WhatsApp, performa ringan.",
+  },
+];
+
+const SERVICES = [
+  {
+    title: "Company Profile / Portofolio",
+    desc: "Website brand yang clean, cepat, dan mudah dikelola.",
+  },
+  {
+    title: "Landing Page Campaign",
+    desc: "Konversi-oriented, tracking siap, dan copy yang fokus hasil.",
+  },
+  {
+    title: "Optimasi Kecepatan & SEO",
+    desc: "Skor Lighthouse tinggi, praktik teknis SEO yang benar.",
+  },
+  {
+    title: "Maintenance & Iteration",
+    desc: "Update berkala, analytics, dan eksperimen A/B ringan.",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    name: "A. Pratama",
+    quote:
+      "Komunikatif dan cepat. Hasil akhir rapi, skor performanya tinggi."
+  },
+  {
+    name: "R. Sari",
+    quote:
+      "Landing page-nya konversi bagus, integrasi WhatsApp sangat membantu."
+  },
+];
+
+// --- Helpers ---
+const useDarkMode = () => {
+  const [dark, setDark] = React.useState(true);
+  React.useEffect(() => {
+    const stored = localStorage.getItem("valdy-theme");
+    if (stored) setDark(stored === "dark");
+  }, []);
+  React.useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+    localStorage.setItem("valdy-theme", dark ? "dark" : "light");
+  }, [dark]);
+  return [dark, setDark];
+};
+
+const Badge = ({ children }) => (
+  <span className="rounded-xl border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/80">{children}</span>
+);
+
+// --- App ---
+export default function App() {
+  const [dark, setDark] = useDarkMode();
+  return (
+    <div className="min-h-screen bg-[#0b0f1a] text-white selection:bg-cyan-500/30 selection:text-white dark:bg-[#0b0f1a]">
+      {/* Nav */}
+      <header className="sticky top-0 z-50 border-b border-white/10 backdrop-blur supports-[backdrop-filter]:bg-black/30">
+        <Container>
+          <nav className="flex h-16 items-center justify-between">
+            <a href="#" className="font-extrabold tracking-tight text-xl">
+              Valdy<span className="text-cyan-400">.</span>
+            </a>
+            <div className="hidden gap-6 md:flex">
+              <a className="text-sm text-white/80 hover:text-white" href="#work">Work</a>
+              <a className="text-sm text-white/80 hover:text-white" href="#services">Services</a>
+              <a className="text-sm text-white/80 hover:text-white" href="#about">About</a>
+              <a className="text-sm text-white/80 hover:text-white" href="#contact">Contact</a>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button as="button" onClick={() => setDark(!dark)} className="bg-white/10 hover:bg-white/15">
+                {dark ? <Sun size={16}/> : <Moon size={16}/>}
+                <span className="hidden sm:inline">Theme</span>
+              </Button>
+              <Button href={LINKS.wa} target="_blank" rel="noopener" className="bg-cyan-500 text-black hover:bg-cyan-400">
+                <Phone size={16}/> Hire Me
+              </Button>
+            </div>
+          </nav>
+        </Container>
+      </header>
+
+      {/* Hero */}
+      <section className="relative overflow-hidden py-16 sm:py-20 md:py-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_-10%,rgba(34,211,238,0.18),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(124,58,237,0.18),transparent_35%)]" />
+        <Container>
+          <div className="grid items-center gap-10 md:grid-cols-2">
+            <div>
+              <motion.h1 initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:.5}} className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+                Saya membangun website <span className="text-cyan-400">cepat</span>, modern, & berfokus hasil.
+              </motion.h1>
+              <p className="mt-5 max-w-xl text-white/70">
+                Dari landing page hingga company profile — mobile‑first, SEO‑ready, dan mudah di-scale. Deploy cepat ke Vercel.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button href="#work" className="bg-white text-black hover:bg-white/90">
+                  Lihat Proyek <ChevronRight size={16}/>
+                </Button>
+                <Button href={LINKS.wa} target="_blank" rel="noopener" className="bg-transparent ring-1 ring-white/20 hover:bg-white/10">
+                  <Phone size={16}/> WhatsApp
+                </Button>
+              </div>
+              <div className="mt-8 flex flex-wrap items-center gap-3 text-white/70">
+                <span className="text-xs">Tech:</span>
+                {['Next.js','React','Tailwind','Vercel','SEO'].map(t=> <Badge key={t}>{t}</Badge>)}
+              </div>
+            </div>
+            <Card className="overflow-hidden">
+              <img alt="cover" className="h-64 w-full object-cover sm:h-80 md:h-full" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400&auto=format&fit=crop" />
+            </Card>
+          </div>
+        </Container>
+      </section>
+
+      {/* Work */}
+      <section id="work" className="py-14 sm:py-16 md:py-20">
+        <Container>
+          <SectionTitle eyebrow="Selected Work" title="Proyek Terpilih" desc="Beberapa pekerjaan yang menonjol — fokus pada pengalaman, performa, dan hasil bisnis." />
+          <div className="grid gap-6 sm:grid-cols-2">
+            {PROJECTS.map((p)=> (
+              <Card key={p.title} className="group overflow-hidden">
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <img src={p.img} alt={p.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="text-lg font-bold">{p.title}</h3>
+                    <div className="flex gap-2">
+                      <a href={p.url} target="_blank" rel="noopener" className="inline-flex items-center gap-1 text-sm text-cyan-400 hover:text-cyan-300">
+                        Live <ExternalLink size={16}/>
+                      </a>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-sm text-white/70">{p.blurb}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {p.stack.map(s=> <Badge key={s}>{s}</Badge>)}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="py-14 sm:py-16 md:py-20">
+        <Container>
+          <SectionTitle eyebrow="Services" title="Layanan" desc="Paket fleksibel sesuai kebutuhan proyek — dari nol sampai optimasi." />
+          <div className="grid gap-6 md:grid-cols-2">
+            {SERVICES.map((s)=> (
+              <Card key={s.title} className="p-6">
+                <h3 className="text-lg font-bold">{s.title}</h3>
+                <p className="mt-2 text-white/70">{s.desc}</p>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* About */}
+      <section id="about" className="py-14 sm:py-16 md:py-20">
+        <Container>
+          <SectionTitle eyebrow="About" title="Tentang Saya" />
+          <Card className="p-6 md:p-10">
+            <div className="grid gap-8 md:grid-cols-3">
+              <div className="md:col-span-2">
+                <p className="text-white/80">
+                  Saya Valdy, web developer yang fokus pada performa, aksesibilitas, dan desain yang bersih. Saya suka membangun UI yang tajam, animasi yang halus, dan arsitektur yang mudah dirawat.
+                </p>
+                <p className="mt-4 text-white/60">
+                  Alur kerja: research → design → build → iterate. Tools favorit: Next.js, React, Tailwind, dan Vercel.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Button href={LINKS.github} target="_blank" rel="noopener" className="bg-white/10 hover:bg-white/15">
+                    <Github size={16}/> GitHub
+                  </Button>
+                  <Button href={LINKS.ig} target="_blank" rel="noopener" className="bg-white/10 hover:bg-white/15">
+                    <Instagram size={16}/> Instagram
+                  </Button>
+                  <Button href={LINKS.email} className="bg-white/10 hover:bg-white/15">
+                    <Mail size={16}/> Email
+                  </Button>
+                </div>
+              </div>
+              <Card className="overflow-hidden">
+                <img alt="Valdy" className="h-56 w-full object-cover md:h-full" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=1200&auto=format&fit=crop" />
+              </Card>
+            </div>
+          </Card>
+        </Container>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-14 sm:py-16 md:py-20">
+        <Container>
+          <SectionTitle eyebrow="Social Proof" title="Testimoni" />
+          <div className="grid gap-6 md:grid-cols-2">
+            {TESTIMONIALS.map((t)=> (
+              <Card key={t.name} className="p-6">
+                <p className="text-white/80">“{t.quote}”</p>
+                <div className="mt-4 text-sm text-white/60">— {t.name}</div>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="py-14 sm:py-16 md:py-20">
+        <Container>
+          <SectionTitle eyebrow="Contact" title="Ayo Diskusi" desc="Ada proyek atau ide? Kirim pesan singkat — saya akan balas cepat." />
+          <Card className="p-6 md:p-10">
+            <div className="grid gap-8 md:grid-cols-2">
+              <form className="space-y-4">
+                <input type="text" placeholder="Nama" className="w-full rounded-xl border border-white/15 bg-transparent px-4 py-3 outline-none placeholder:text-white/40 focus:border-cyan-400" />
+                <input type="email" placeholder="Email" className="w-full rounded-xl border border-white/15 bg-transparent px-4 py-3 outline-none placeholder:text-white/40 focus:border-cyan-400" />
+                <textarea placeholder="Pesan" rows={5} className="w-full rounded-xl border border-white/15 bg-transparent px-4 py-3 outline-none placeholder:text-white/40 focus:border-cyan-400" />
+                <div className="flex gap-3">
+                  <Button as="button" type="button" onClick={()=>window.location.href=LINKS.email} className="bg-white text-black hover:bg-white/90">
+                    <Mail size={16}/> Kirim via Email
+                  </Button>
+                  <Button href={LINKS.wa} target="_blank" rel="noopener" className="bg-transparent ring-1 ring-white/20 hover:bg-white/10">
+                    <Phone size={16}/> WhatsApp
+                  </Button>
+                </div>
+              </form>
+              <div className="space-y-4">
+                <Card className="p-5">
+                  <div className="flex items-center gap-3 text-white/80"><Phone size={18}/> <span>082292996138</span></div>
+                </Card>
+                <Card className="p-5">
+                  <a href={LINKS.github} target="_blank" rel="noopener" className="flex items-center gap-3 text-white/80 hover:text-white"><Github size={18}/> <span>GitHub Projects</span></a>
+                </Card>
+                <Card className="p-5">
+                  <a href={LINKS.ig} target="_blank" rel="noopener" className="flex items-center gap-3 text-white/80 hover:text-white"><Instagram size={18}/> <span>@valarss_</span></a>
+                </Card>
+                <Card className="p-5">
+                  <a href="https://istimewaplafon.com/" target="_blank" rel="noopener" className="flex items-center gap-3 text-white/80 hover:text-white"><Globe size={18}/> <span>Istimewa Plafon</span></a>
+                </Card>
+                <Card className="p-5">
+                  <a href="https://brutal-rental.vercel.app/" target="_blank" rel="noopener" className="flex items-center gap-3 text-white/80 hover:text-white"><Globe size={18}/> <span>Brutal Rental</span></a>
+                </Card>
+              </div>
+            </div>
+          </Card>
+        </Container>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 py-10 text-sm text-white/60">
+        <Container>
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <div>© {new Date().getFullYear()} Valdy. All rights reserved.</div>
+            <div className="flex items-center gap-4">
+              <a href={LINKS.github} target="_blank" rel="noopener" className="hover:text-white"><Github size={18}/></a>
+              <a href={LINKS.ig} target="_blank" rel="noopener" className="hover:text-white"><Instagram size={18}/></a>
+              <a href={LINKS.email} className="hover:text-white"><Mail size={18}/></a>
+            </div>
+          </div>
+        </Container>
+      </footer>
+    </div>
+  );
+}
+
