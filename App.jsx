@@ -117,7 +117,7 @@ const TESTIMONIALS = [
   },
 ];
 
-const LANGUAGES = ["JavaScript"];
+const LANGUAGES = [];
 
 const SITE_LINKS = [
   { title: "Istimewa Plafon", url: "https://istimewaplafon.com/" },
@@ -421,7 +421,7 @@ export default function App() {
                   <div className="mt-8 flex flex-wrap gap-3">
                     <Button
                       href="#work"
-                      className="bg-slate-900 text-white hover:bg-slate-800 dark:bg-white text-slate-900 dark:hover:bg-white/90"
+                      className="bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-white/90"
                     >
                       Lihat Proyek <ChevronRight size={16} />
                     </Button>
@@ -450,8 +450,8 @@ export default function App() {
                 <TiltCard className="mx-auto max-w-md md:max-w-full">
                   <div className="relative">
                     <img
-                      src="assets/img/website.png"
-                      alt="Website preview"
+                      src="assets/img/bg-portofolio.jpeg"
+                      alt="Portfolio preview"
                       className="h-72 w-full object-cover md:h-[28rem]"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-400/30 via-transparent to-blue-500/25 mix-blend-screen" />
@@ -545,20 +545,22 @@ export default function App() {
                       <Mail size={16} /> Email
                     </Button>
                   </div>
-                  <div className="mt-8">
-                    <div className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-white/50">
-                      Bahasa Pemrograman
+                  {LANGUAGES.length > 0 && (
+                    <div className="mt-8">
+                      <div className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-white/50">
+                        Bahasa Pemrograman
+                      </div>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {LANGUAGES.map((lang) => (
+                          <Badge key={lang}>{lang}</Badge>
+                        ))}
+                      </div>
                     </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {LANGUAGES.map((lang) => (
-                        <Badge key={lang}>{lang}</Badge>
-                      ))}
-                    </div>
-                  </div>
+                  )}
                 </div>
                 <div className="space-y-6">
-                  <div className="relative overflow-hidden rounded-2xl border border-slate-900/10 bg-slate-100/60 shadow-inner dark:border-white/10 dark:bg-white/5">
-                    <img src="assets/img/self.jpg" alt="Foto Valdy" className="h-full w-full object-cover" />
+                  <div className="relative mx-auto max-w-sm overflow-hidden rounded-2xl border border-slate-900/10 bg-slate-100/60 shadow-inner dark:border-white/10 dark:bg-white/5">
+                    <img src="assets/img/self.jpg" alt="Foto Valdy" className="h-80 w-full object-cover object-center" />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent" />
                   </div>
                   <Card className="p-6">
