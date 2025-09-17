@@ -450,7 +450,7 @@ export default function App() {
                 <TiltCard className="mx-auto max-w-md md:max-w-full">
                   <div className="relative">
                     <img
-                      src="assets/img/bg-portofolio.jpeg"
+                      src="assets/img/bg-portofolio.jpg"
                       alt="Portfolio preview"
                       className="h-72 w-full object-cover md:h-[28rem]"
                     />
