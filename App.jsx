@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Github, Instagram, Mail, Phone, Globe, ChevronRight, ExternalLink, Moon, Sun } from "lucide-react";
 
@@ -49,6 +49,13 @@ const NAV_LINKS = [
 
 const PROJECTS = [
   {
+    title: "Customer Segmentation Analysis",
+    url: "https://colab.research.google.com/drive/1jDhCGc6UGoPXoEyw0H8csDBYD2Cstex-?usp=sharing",
+    img: "assets/img/data-analyst.png",
+    stack: ["Python", "Pandas", "Google Colab", "Data Visualization"],
+    blurb: "Analisis segmentasi pelanggan dengan clustering untuk memetakan persona dan rekomendasi strategi pemasaran.",
+  },
+  {
     title: "Istimewa Plafon",
     url: "https://istimewaplafon.com/",
     img: "assets/img/istimewaplafon-website.jpg",
@@ -89,20 +96,20 @@ const PROJECTS = [
 
 const SERVICES = [
   {
-    title: "Company Profile / Portofolio",
-    desc: "Website brand yang clean, cepat, dan mudah dikelola.",
+    title: "Website Company Profile & Web App",
+    desc: "Website brand yang clean, cepat, dan mudah dikelola untuk scale berikutnya.",
   },
   {
     title: "Landing Page Campaign",
-    desc: "Berfokus pada konversi dengan tracking yang siap pakai.",
+    desc: "Berfokus pada konversi dengan tracking, A/B testing, dan copy yang siap pakai.",
   },
   {
-    title: "Optimasi Kecepatan & SEO",
-    desc: "Skor Lighthouse tinggi dengan praktik teknis SEO yang benar.",
+    title: "Data Analytics & Dashboard",
+    desc: "Merapikan data mentah, membangun dashboard Looker Studio/Colab, dan menyusun insight bisnis.",
   },
   {
-    title: "Maintenance & Iteration",
-    desc: "Update rutin, analytics, dan eksperimen berbasis data.",
+    title: "Segmentasi & Reporting",
+    desc: "Cluster pelanggan, forecasting sederhana, dan rekomendasi berbasis data yang praktis.",
   },
 ];
 
@@ -120,6 +127,7 @@ const TESTIMONIALS = [
 const LANGUAGES = [];
 
 const SITE_LINKS = [
+  { title: "Customer Segmentation Analysis", url: "https://colab.research.google.com/drive/1jDhCGc6UGoPXoEyw0H8csDBYD2Cstex-?usp=sharing" },
   { title: "Istimewa Plafon", url: "https://istimewaplafon.com/" },
   { title: "Brutal Rental", url: "https://brutal-rental.vercel.app/" },
   { title: "Kahuy House", url: "https://kahuyhouse.com/" },
@@ -404,17 +412,17 @@ export default function App() {
               <div className="relative z-10">
                 <FadeIn>
                   <span className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-white/70">
-                    Web Developer
+                    Web Developer & Data Analyst
                   </span>
                 </FadeIn>
                 <FadeIn delay={0.1} className="mt-6">
                   <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl md:text-6xl">
-                    Saya membangun website <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">cepat</span> dengan pengalaman premium.
+                    Saya membangun website <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">cepat</span> dan insight data yang jadi dasar keputusan bisnis.
                   </h1>
                 </FadeIn>
                 <FadeIn delay={0.2}>
                   <p className="mt-5 max-w-xl text-base text-slate-600 dark:text-white/70">
-                    Dari landing page hingga company profile: mobile-first, SEO-ready, dan siap scale. Integrasi analytics, copy yang fokus hasil, dan handover yang rapi.
+                    Dari landing page hingga dashboard data: mobile-first, SEO-ready, pipeline bersih, dan insight yang bisa langsung dieksekusi oleh tim bisnis.
                   </p>
                 </FadeIn>
                 <FadeIn delay={0.3}>
@@ -439,7 +447,7 @@ export default function App() {
                   <div className="mt-8 flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-white/50">
                     <span>Tech</span>
                     <div className="flex flex-wrap gap-2">
-                      {["JavaScript", "Next.js", "React", "Tailwind", "SEO"].map((tech) => (
+                      {["JavaScript", "React", "Next.js", "Tailwind", "Python", "Pandas", "SQL", "Looker Studio"].map((tech) => (
                         <Badge key={tech}>{tech}</Badge>
                       ))}
                     </div>
@@ -458,6 +466,7 @@ export default function App() {
                     <div className="pointer-events-none absolute bottom-6 left-6 flex gap-3">
                       <Badge>Performance 95+</Badge>
                       <Badge>Aksesibilitas</Badge>
+                      <Badge>Data Insight</Badge>
                     </div>
                   </div>
                 </TiltCard>
@@ -476,7 +485,7 @@ export default function App() {
             <SectionTitle
               eyebrow="Selected Work"
               title="Proyek Terpilih"
-              desc="Beberapa pekerjaan terbaru dengan fokus pada pengalaman pengguna, performa tinggi, dan hasil bisnis yang terukur."
+              desc="Beberapa pekerjaan terbaru: website performa tinggi dan analisis data yang langsung memetakan insight bisnis."
             />
             <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 md:grid md:grid-cols-2 md:gap-8 md:overflow-visible md:pb-0 md:snap-none">
               {PROJECTS.map((project, index) => (
@@ -493,7 +502,7 @@ export default function App() {
             <SectionTitle
               eyebrow="Services"
               title="Layanan"
-              desc="Paket fleksibel sesuai kebutuhan proyek — dari build pertama sampai optimasi lanjutan."
+              desc="Paket fleksibel untuk pengembangan web dan analisis data - dari build pertama sampai insight siap presentasi."
             />
             <div className="grid gap-6 md:grid-cols-2">
               {SERVICES.map((service, index) => (
@@ -515,11 +524,10 @@ export default function App() {
               <div className="grid gap-10 md:grid-cols-[1.5fr_1fr]">
                 <div>
                   <p className="text-base text-slate-600 dark:text-white/70">
-                    Saya Valdy, web developer yang fokus pada performa, aksesibilitas, dan desain yang bersih. Saya suka
-                    membangun UI tajam, animasi yang halus, serta arsitektur yang mudah dirawat oleh tim berikutnya.
+                    Saya Valdy, Web Developer & Data Analyst yang fokus pada performa, aksesibilitas, dan insight data yang bisa ditindaklanjuti. Saya suka membangun UI tajam, animasi halus, serta pipeline data yang memberi cerita jelas untuk tim berikutnya.
                   </p>
                   <p className="mt-4 text-base text-slate-500 dark:text-white/60">
-                    Alur kerja saya sederhana: riset kebutuhan, desain yang relevan, build yang rapi, lalu iterasi berdasarkan data. Tools favorit termasuk Next.js, React, Tailwind, dan Vercel.
+                    Alur kerja saya: riset kebutuhan, prototype cepat, build yang rapi, kemudian validasi lewat eksperimen dan analisis data. Tools favorit termasuk Next.js, React, Tailwind, Python, Pandas, dan Looker Studio.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Button
@@ -568,9 +576,9 @@ export default function App() {
                       Highlight
                     </div>
                     <ul className="mt-4 space-y-2 text-sm text-slate-600 dark:text-white/70">
-                      <li>• Fokus pada loading cepat dan skor performa tinggi.</li>
-                      <li>• Workflow kolaboratif dengan dokumentasi yang jelas.</li>
-                      <li>• Support pasca-launch untuk iterasi dan maintenance.</li>
+                      <li>Fokus pada loading cepat dan insight data yang mudah dipahami stakeholder.</li>
+                      <li>Workflow kolaboratif dengan dokumentasi dev & notebook yang rapi.</li>
+                      <li>Dashboard dan laporan segmentasi siap pakai pasca-launch.</li>
                     </ul>
                   </Card>
                 </div>
@@ -586,8 +594,8 @@ export default function App() {
               {TESTIMONIALS.map((testimonial, index) => (
                 <FadeIn key={testimonial.name} delay={0.05 * index}>
                   <Card className="p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(15,23,42,0.4)] dark:hover:shadow-[0_35px_65px_-35px_rgba(6,182,212,0.55)]">
-                    <p className="text-base text-slate-600 dark:text-white/70">“{testimonial.quote}”</p>
-                    <div className="mt-4 text-sm font-semibold text-slate-500 dark:text-white/60">— {testimonial.name}</div>
+                    <p className="text-base text-slate-600 dark:text-white/70">?{testimonial.quote}?</p>
+                    <div className="mt-4 text-sm font-semibold text-slate-500 dark:text-white/60">? {testimonial.name}</div>
                   </Card>
                 </FadeIn>
               ))}
@@ -620,7 +628,7 @@ export default function App() {
                         className="flex items-center gap-3 text-slate-700 transition-colors hover:text-cyan-500 dark:text-white/70 dark:hover:text-cyan-400"
                       >
                         <Phone size={18} />
-                        <span>082292996138 — WhatsApp</span>
+                        <span>082292996138 ? WhatsApp</span>
                       </a>
                       <a
                         href={LINKS.email}
@@ -685,7 +693,7 @@ export default function App() {
       <footer className="border-t border-slate-900/10 py-10 text-sm text-slate-500 transition-colors duration-500 dark:border-white/10 dark:text-white/60">
         <Container>
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <div>© {new Date().getFullYear()} Valdy. All rights reserved.</div>
+            <div>? {new Date().getFullYear()} Valdy. All rights reserved.</div>
             <div className="flex items-center gap-4">
               <a href={LINKS.github} target="_blank" rel="noopener" className="hover:text-cyan-500">
                 <Github size={18} />
@@ -703,3 +711,4 @@ export default function App() {
     </div>
   );
 }
+
