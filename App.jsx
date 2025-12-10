@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { motion } from "framer-motion";
 import { Github, Instagram, Mail, Phone, Globe, ChevronRight, ExternalLink, Moon, Sun } from "lucide-react";
 
@@ -90,6 +90,15 @@ const PROJECTS = [
     logo: "assets/img/kahuy-logo.png",
     stack: ["WordPress", "Tailwind CSS", "SEO"],
     blurb: "Showcase rumah kayu dengan visual immersif, CTA cepat ke WhatsApp, dan copy ramah pengguna.",
+    fit: "contain",
+  },
+  {
+    title: "Sagala Bimbel",
+    url: "https://sagalabimbel-test.vercel.app/",
+    img: "assets/img/sagala-bimbel-banner.png",
+    logo: "assets/img/sagalalogo-fix.png",
+    stack: ["Javascript", "Tailwind CSS", "SEO"],
+    blurb: "Bimbingan belajar untuk kedinasan dan CPNS terpercaya dan termurah di Indonesia.",
     fit: "contain",
   },
 ];
@@ -458,7 +467,7 @@ export default function App() {
                 <TiltCard className="mx-auto max-w-md md:max-w-full">
                   <div className="relative">
                     <img
-                      src="assets/img/bg-portofolio.jpg"
+                      src="public/assets/img/bg-portofolio.jpg"
                       alt="Portfolio preview"
                       className="h-72 w-full object-cover md:h-[28rem]"
                     />
